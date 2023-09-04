@@ -1,9 +1,8 @@
-// Import necessary modules and components
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { useState, useEffect } from 'react';
 import { useFonts } from 'expo-font';
-import CustomSpinner from './CustomSpinner'; // Import the custom spinner component
+import * as Animatable from 'react-native-animatable';
 
 // Define the main App component
 export default function App() {
@@ -26,8 +25,14 @@ export default function App() {
   if (!fontsLoaded || isLoading) {
     return (
       <View style={styles.loadingContainer}>
-        {/* Use the custom spinner component */}
-        <CustomSpinner />
+        {/* Custom Dot Pulse Spinner */}
+        <Animatable.View
+          animation="pulse"
+          easing="ease-out"
+          iterationCount="infinite"
+          style={styles.customSpinner}
+        ></Animatable.View>
+        <Text style={styles.loadingText}>Loading...</Text>
       </View>
     );
   } else {
@@ -56,11 +61,28 @@ const styles = StyleSheet.create({
     backgroundColor: '#043C2C', // Background color
   },
 
-  // Dot Pulse Spinner styles
+  // Custom Dot Pulse Spinner styles
+  customSpinner: {
+    width: 150,
+    height: 150,
+    backgroundColor: '#CEE2D2', // Adjust the color as needed
+    borderRadius: 75,
+  },
+
+  // Loading text styles
+  loadingText: {
+    marginTop: 30, // Add space between the spinner and text
+    fontSize: 24, // Adjust the font size as needed
+    color: '#CEE2D2', // Text color
+    fontFamily: 'Poppins-Regular', // Custom font
+  },
+
+// Dot Pulse Spinner styles
   spinner: {
     flexDirection: 'row',
     alignItems: 'center',
   },
+  
   dot: {
     width: 10,
     height: 10,
