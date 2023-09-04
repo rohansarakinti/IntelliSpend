@@ -1,15 +1,16 @@
 // Import necessary modules and components
-import { StatusBar } from 'expo-status-bar'
-import { StyleSheet, Text, View } from 'react-native'
-import { useState, useEffect } from 'react'
-import { useFonts } from 'expo-font'
+import { StatusBar } from 'expo-status-bar';
+import { StyleSheet, Text, View } from 'react-native';
+import { useState, useEffect } from 'react';
+import { useFonts } from 'expo-font';
+import CustomSpinner from './CustomSpinner'; // Import the custom spinner component
 
 // Define the main App component
 export default function App() {
   // Load custom fonts using the 'useFonts' hook
   const [fontsLoaded] = useFonts({
-    'Poppins-Regular': require('./assets/fonts/Poppins-Regular.ttf')
-  })
+    'Poppins-Regular': require('./assets/fonts/Poppins-Regular.ttf'),
+  });
 
   // Define a loading state
   const [isLoading, setIsLoading] = useState(true);
@@ -25,13 +26,8 @@ export default function App() {
   if (!fontsLoaded || isLoading) {
     return (
       <View style={styles.loadingContainer}>
-        {/* Dot Pulse Spinner */}
-        <View style={styles.spinner}>
-          <View style={styles.dot}></View>
-          <View style={styles.dot}></View>
-          <View style={styles.dot}></View>
-        </View>
-        <Text>Loading...</Text>
+        {/* Use the custom spinner component */}
+        <CustomSpinner />
       </View>
     );
   } else {
