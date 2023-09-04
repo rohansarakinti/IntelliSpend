@@ -11,11 +11,31 @@ export default function App() {
     'Poppins-Regular': require('./assets/fonts/Poppins-Regular.ttf')
   })
 
-  // Check if fonts are not yet loaded, return null to display nothing
-  if (!fontsLoaded) {
-    return null
+  // Define a loading state
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate an async task (e.g., loading data)
+    setTimeout(() => {
+      setIsLoading(false); // Set loading to false after the task is done
+    }, 3000); // Simulated 3-second loading time
+  }, []);
+
+  // Check if fonts are not yet loaded or isLoading is true, return a loading screen
+  if (!fontsLoaded || isLoading) {
+    return (
+      <View style={styles.loadingContainer}>
+        {/* Dot Pulse Spinner */}
+        <View style={styles.spinner}>
+          <View style={styles.dot}></View>
+          <View style={styles.dot}></View>
+          <View style={styles.dot}></View>
+        </View>
+        <Text>Loading...</Text>
+      </View>
+    );
   } else {
-    // Return the main content when fonts are loaded
+    // Return the main content when fonts are loaded and loading is complete
     return (
       <View style={styles.landingPage}>
         <View style={styles.container1}>
@@ -26,16 +46,37 @@ export default function App() {
         </View>
         <StatusBar style="auto" />
       </View>
-    )
+    );
   }
 }
 
 // Define styles using StyleSheet.create for the CSS section
 const styles = StyleSheet.create({
+  // Style for the overall loading container
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#043C2C', // Background color
+  },
+
+  // Dot Pulse Spinner styles
+  spinner: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  dot: {
+    width: 10,
+    height: 10,
+    borderRadius: 5,
+    backgroundColor: '#CEE2D2',
+    marginHorizontal: 5,
+  },
+
   // Style for the overall landing page
   landingPage: {
     flex: 1,
-    backgroundColor: '#043C2C' // Background color
+    backgroundColor: '#043C2C', // Background color
   },
 
   // Style for the container holding titles
@@ -63,5 +104,5 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-Regular', // Custom font
     textAlign: 'center', // Text alignment
     fontSize: 48, // Font size
-  }
+  },
 });
