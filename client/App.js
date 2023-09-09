@@ -3,7 +3,9 @@ import { StyleSheet, Text, View, Image, Alert, Pressable} from 'react-native'
 import { useState, useEffect } from 'react'
 import { useFonts } from 'expo-font'
 
+// Define the main App component
 export default function App() {
+  // Load custom fonts using the 'useFonts' hook
   const [fontsLoaded] = useFonts({
     'Poppins-Regular': require('./assets/fonts/Poppins-Regular.ttf'),
     'Poppins-SemiBold' : require('./assets/fonts/Poppins-SemiBold.ttf'),
@@ -46,10 +48,11 @@ export default function App() {
         </Pressable>
         <StatusBar style="auto" />
       </View>
-    )
+    );
   }
 }
 
+// Define styles using StyleSheet.create for the CSS section
 const styles = StyleSheet.create({
   logo_title: {
     width: '100%', 
@@ -104,6 +107,4 @@ const styles = StyleSheet.create({
     marginBottom: 'auto', 
     fontSize: 19,
   }
-
-
 });
