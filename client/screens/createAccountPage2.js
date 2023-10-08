@@ -21,11 +21,11 @@ const createAccountPage2 = () => {
             
                 <Pressable
                 onPress= {()=> {
-                    Alert.alert('Submit button pressed')
+                    Alert.alert('Terms/Conditions pressed')
                 }}
                 style = {styles.termPressable}
                 >
-                <Text style={styles.radioLabel}>Terms of policies</Text>
+                <Text style={styles.radioLabel}>Terms/Conditions</Text>
                 </Pressable>
 
                 <RadioButton
@@ -34,17 +34,17 @@ const createAccountPage2 = () => {
                 onPress={() => setChecked('Yes')}
                 color='green'
                 backgroundColor='lightgreen'
-                width='10%'
+                width='12%'
                 height='5%'
                 top='50%'
-                right='25%'
+                right='20%'
                 />
 
                 <Text style={styles.radioButtonLabelYes}>I agree</Text>
 
                 <Pressable
                 onPress={() => {
-                Alert.alert('Log In button pressed') 
+                Alert.alert('Submit button pressed') 
                 }}
                 style={({pressed}) => [
                 {
