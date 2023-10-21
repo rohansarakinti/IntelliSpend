@@ -6,6 +6,10 @@ import { RadioButton } from 'react-native-paper';
 const createAccountPage = () => {
 
     const [checked, setChecked] = React.useState('Yes');
+    const [name, setName] = React.useState('');
+    const [email, setEmail] = React.useState('');
+    const [phonenumber, setPhonenumber] = React.useState('');
+    const [country, setCountry] = React.useState('');
 
     const [fontsLoaded] = useFonts({
       'Poppins-Regular': require('../assets/fonts/Poppins-Regular.ttf'),
@@ -15,29 +19,38 @@ const createAccountPage = () => {
     if (!fontsLoaded) {
       return null
     } else {
-            
+      
+
       return (
         <ScrollView> 
           <View style={styles.container}>
             <View style={styles.inputSection}>
               <Text style={styles.createAccountInputLabels} >Name</Text>
               <View style={styles.line}></View>
-              <TextInput style={styles.textInput} placeholder="Name"/>
+              <TextInput style={styles.textInput} placeholder="Name"
+              defaultValue='' onChangeText={newName => setName(newName)}
+              />
             </View>
             <View style={styles.inputSection}>
               <Text style={styles.createAccountInputLabels} >Email</Text>
               <View style={styles.line}></View>
-              <TextInput style={styles.textInput} placeholder="example@email.com"/>
+              <TextInput style={styles.textInput} placeholder="example@email.com"
+              defaultValue='' onChangeText={newEmail => setEmail(newEmail)}
+              />
             </View>
             <View style={styles.inputSection}>
               <Text style={styles.createAccountInputLabels}>Phone Number</Text>
               <View style={styles.line}></View>
-              <TextInput style={styles.textInput} placeholder="+1 (111) 111-1111"/>
+              <TextInput style={styles.textInput} placeholder="+1 (111) 111-1111"
+              defaultValue='' onChangeText={newPhonenumber => setPhonenumber(newPhonenumber)}
+              />
             </View>
             <View style={styles.inputSection}>
               <Text style={styles.createAccountInputLabels}>Country</Text>
               <View style={styles.line}></View>
-              <TextInput style={styles.textInput} placeholder="Country"/>
+              <TextInput style={styles.textInput} placeholder="Country"
+              defaultValue='' onChangeText={newCountry => setCountry(newCountry)}
+              />
             </View>
             
             <Text style={styles.radioLabel}>Monthly Newsletter for finance advice?</Text>

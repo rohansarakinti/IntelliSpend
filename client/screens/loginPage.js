@@ -3,6 +3,9 @@ import React from 'react'
 import { useFonts } from '@expo-google-fonts/poppins';
 
 const loginPage = () => {
+
+    const[password, setPassword] = React.useState('');
+
     const [fontsLoaded] = useFonts({
       'Poppins-Regular': require('../assets/fonts/Poppins-Regular.ttf'),
       'Poppins-SemiBold' : require('../assets/fonts/Poppins-SemiBold.ttf'),
@@ -16,7 +19,9 @@ const loginPage = () => {
         <View style={styles.container}>
           <Text style={styles.logInTitle} >Log In</Text>
           <View style={styles.line}></View>
-          <TextInput style={styles.textInput} placeholder="Password"/>
+          <TextInput style={styles.textInput} placeholder="Password"
+          defaultValue='' onChangeText={newPassword => setPassword(newPassword)}
+          />
           <Pressable
           onPress={() => {
             Alert.alert('Log In button pressed') 

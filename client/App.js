@@ -4,12 +4,12 @@ import { useState, useEffect } from 'react'
 import { useFonts } from 'expo-font'
 import LandingPage from "./screens/landingPage"
 import LoginPage from './screens/loginPage'
-import CreateAccountPage2 from './screens/createAccountPage2'
+import ExpensesPage from './screens/expensesPage'
 
 // Define the main App component
 export default function App() {
   return(
-    <CreateAccountPage2 />
+    <ExpensesPage />
   )
 }
 ;
