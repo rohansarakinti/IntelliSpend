@@ -1,0 +1,17 @@
+@keyframes FadeIn {
+    0% {
+        opacity: 0;
+        position: relative;
+        top: 20px;
+    }
+    100% {
+        opacity: 1;
+        position: relative;
+        top: 0px;
+    }
+}
+
+.fadeIn {
+    animation-name: FadeIn;
+    animation-duration: 2s
+}
