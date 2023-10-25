@@ -39,15 +39,9 @@ export default function Signup() {
     })
     const [rememberMe, setRememberMe] = useState(false)
     useEffect(() => {
-        client.get("/checkLogin").then((res) => {
-            if (res.data.loggedIn) {
-                window.location.replace("/dashboard")
-            } else {
-                setLoading(false)
-            }
-        }).catch((error) => {
-            console.error(error.message)
-        })
+        if (window.localStorage.getItem("uid") || window.sessionStorage.getItem("uid")) {
+            window.location.replace("/dashboard")
+        }
         setLoading(false)
     }, [])
 
@@ -63,6 +57,11 @@ export default function Signup() {
                     setSubmitting(false)
                     console.error(response.data.errorMessage)
                 } else {
+                    if (rememberMe) {
+                        window.localStorage.setItem("uid", response.data.uid)
+                    } else {
+                        window.sessionStorage.setItem("uid", response.data.uid)
+                    }
                     window.location.replace("/dashboard")
                 }
             }).catch((error) => {
@@ -79,15 +78,15 @@ export default function Signup() {
     } else {
         return (
             <Container centered>
-                <Navbar loggedIn={false}></Navbar>
+                <Navbar></Navbar>
                 <div className="w-full md:w-5/6 h-full flex flex-row-reverse items-center">
                     <Card className="w-full h-full rounded-none md:rounded-lg md:w-2/3 md:h-[90%] md:rounded-r-lg">
                         <CardBody>
                             <div className="w-full h-full flex justify-center">
                                 <div className="w-5/6 flex flex-col items-center justify-center h-full gap-y-5">
                                     <h1 className="font-normal text-4xl">Register</h1>
-                                    <Input label="Email" type="email" size="sm" variant='bordered' isInvalid={error.email.error} errorMessage={error.email.errorMessage} onChange={(e) => {
-                                        setEmail(e.target.value)
+                                    <Input label="Email" type="email" size="sm" variant='bordered' isInvalid={error.email.error} errorMessage={error.email.errorMessage} onInput={(e) => {
+                                        setEmail(e.currentTarget.value)
                                         setError(prevState => ({
                                             ...prevState,
                                             email: {
@@ -96,8 +95,8 @@ export default function Signup() {
                                             }
                                         }))
                                     }} />
-                                    <Input label="Confirm Email" type="email" size="sm" variant='bordered' isInvalid={error.confirmEmail.error} errorMessage={error.confirmEmail.errorMessage} onChange={(e) => {
-                                        setConfirmEmail(e.target.value)
+                                    <Input label="Confirm Email" type="email" size="sm" variant='bordered' isInvalid={error.confirmEmail.error} errorMessage={error.confirmEmail.errorMessage} onInput={(e) => {
+                                        setConfirmEmail(e.currentTarget.value)
                                         setError(prevState => ({
                                             ...prevState,
                                             confirmEmail: {
@@ -118,8 +117,8 @@ export default function Signup() {
                                                 visible.password ? <EyeSlash /> : <Eye />
                                             }
                                         </button>
-                                    } onChange={(e) => {
-                                        setPassword(e.target.value)
+                                    } onInput={(e) => {
+                                        setPassword(e.currentTarget.value)
                                         setError(prevState => ({
                                             ...prevState,
                                             password: {
@@ -132,15 +131,15 @@ export default function Signup() {
                                         <button onClick={() => {
                                             setVisible(prevState => ({
                                                 ...prevState,
-                                                password: !prevState.confirmPassword
+                                                confirmPassword: !prevState.confirmPassword
                                             }))
                                         }}>
                                             {
                                                 visible.confirmPassword ? <EyeSlash /> : <Eye />
                                             }
                                         </button>
-                                    } onChange={(e) => {
-                                        setConfirmPassword(e.target.value)
+                                    } onInput={(e) => {
+                                        setConfirmPassword(e.currentTarget.value)
                                         setError(prevState => ({
                                             ...prevState,
                                             confirmPassword: {

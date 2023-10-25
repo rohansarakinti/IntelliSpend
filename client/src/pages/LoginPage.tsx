@@ -16,15 +16,9 @@ export default function LoginPage() {
     const [visible, setVisible] = useState(false)
     const [rememberMe, setRememberMe] = useState(false)
     useEffect(() => {
-        client.get("/checkLogin").then((res) => {
-            if (res.data.loggedIn) {
-                window.location.replace("/dashboard")
-            } else {
-                setLoading(false)
-            }
-        }).catch((error) => {
-            console.error(error.message)
-        })
+        if (window.localStorage.getItem("uid") || window.sessionStorage.getItem("uid")) {
+            window.location.replace("/dashboard")
+        }
         setLoading(false)
     }, [])
 
@@ -32,10 +26,16 @@ export default function LoginPage() {
         setSubmitting(true)
         client.post("/login", {
             email: email,
-            password: password,
-            rememberMe: rememberMe
+            password: password
         }).then((response) => {
-            if (response.data.success) {
+            console.log(response.data.error)
+            console.log(response.data.errorMessage)
+            if (!response.data.error) {
+                if (rememberMe) {
+                    window.localStorage.setItem("uid", response.data.uid)
+                } else {
+                    window.sessionStorage.setItem("uid", response.data.uid)
+                }
                 window.location.replace("/dashboard")
             } else {
                 setSubmitting(false)
@@ -50,15 +50,15 @@ export default function LoginPage() {
     } else {
         return (
             <Container>
-                <Navbar loggedIn={false} />
+                <Navbar />
                 <div className="grow w-full flex">
                     <Card className="w-full h-full rounded-none md:w-1/2 lg:w-2/5 md:rounded-r-lg">
                         <CardBody>
                             <div className="w-full h-full flex justify-center">
                                 <div className="w-5/6 flex flex-col items-center justify-center h-full gap-y-5">
                                     <h1 className="font-normal text-4xl">Log In</h1>
-                                    <Input label="Email" type="email" size="sm" variant='bordered' onChange={(e) => {
-                                        setEmail(e.target.value)
+                                    <Input label="Email" type="email" size="sm" variant='bordered' onInput={(e) => {
+                                        setEmail(e.currentTarget.value)
                                     }} />
                                     <Input label="Password" size="sm" variant="bordered" type={visible ? "text" : "password"} endContent={
                                         <button onClick={() => {
@@ -68,8 +68,8 @@ export default function LoginPage() {
                                                 visible ? <EyeSlash /> : <Eye />
                                             }
                                         </button>
-                                    } onChange={(e) => {
-                                        setPassword(e.target.value)
+                                    } onInput={(e) => {
+                                        setPassword(e.currentTarget.value)
                                     }} />
                                     <Checkbox color='success' isSelected={rememberMe} onClick={() => {
                                         setRememberMe(prevState => !prevState)

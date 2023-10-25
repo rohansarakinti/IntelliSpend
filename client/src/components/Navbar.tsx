@@ -1,9 +1,14 @@
 import { Navbar as Nav, NavbarBrand, NavbarContent, NavbarMenuToggle, NavbarMenu, NavbarMenuItem, Button } from '@nextui-org/react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
-export default function Navbar(props: { loggedIn: boolean }) {
+export default function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
-
+    const [loggedIn, setLoggedIn] = useState(false)
+    useEffect(() => {
+        if (window.localStorage.getItem("uid") || window.sessionStorage.getItem("uid")) {
+            setLoggedIn(true)
+        }
+    })
 
     return (
         <Nav isBordered>
@@ -15,13 +20,13 @@ export default function Navbar(props: { loggedIn: boolean }) {
             </NavbarContent>
             <NavbarContent justify='end'>
                 <Button onClick={() => {
-                    if (props.loggedIn) {
+                    if (loggedIn) {
                         window.location.replace("/dashboard")
                     } else {
                         window.location.replace("/login")
                     }
                 }} color="success" className="text-white">
-                    {props.loggedIn ? "Dashboard" : "Login"}
+                    {loggedIn ? "Dashboard" : "Login"}
                 </Button>
             </NavbarContent>
         </Nav>

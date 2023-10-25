@@ -67,14 +67,17 @@ app.post("/create_user", async (req: Request, res: Response) => {
         } else {
             try {
                 const { user } = await createUserWithEmailAndPassword(auth, req.body.email, req.body.password)
-                await setDoc(doc(db, "users", user.uid), {
+                await setDoc(doc(db, Collections.Users, user.uid), {
                     email: user.email
                 })
-                if (req.body.rememberMe) {
-                    res.cookie("uid", user.uid, { maxAge: 1000 * 60 * 60 * 24 * 30, signed: true, httpOnly: true, secure: true })
-                } else {
-                    res.cookie("uid", user.uid, { signed: true, httpOnly: true, secure: true })
-                }
+                await setDoc(doc(db, Collections.Emails, user.email!), {
+                    uid: user.uid
+                })
+                res.json({
+                    error: false,
+                    errorMessage: "",
+                    uid: user.uid
+                })
             } catch (error) {
                 console.log(error)
                 res.json({
@@ -103,14 +106,10 @@ app.post("/login", async (req: Request, res: Response) => {
         } else {
             try {
                 const { user } = await signInWithEmailAndPassword(auth, req.body.email, req.body.password)
-                if (req.body.rememberMe) {
-                    res.cookie("uid", user.uid, { maxAge: 1000 * 60 * 60 * 24 * 30, signed: true, httpOnly: true, secure: true })
-                } else {
-                    res.cookie("uid", user.uid, { signed: true, httpOnly: true, secure: true })
-                }
                 res.json({
                     error: false,
-                    errorMessage: ""
+                    errorMessage: "",
+                    uid: user.uid
                 })
             } catch (error) {
                 console.log(error)
@@ -127,25 +126,6 @@ app.post("/login", async (req: Request, res: Response) => {
             errorMessage: "Server is not responding. Please try again later."
         })
     }
-})
-
-app.get("/checkLogin", (req: Request, res: Response) => {
-    if (req.signedCookies.uid) {
-        res.json({
-            loggedIn: true
-        })
-    } else {
-        res.json({
-            loggedIn: false
-        })
-    }
-})
-
-app.post("/signout", (req, res) => {
-    res.clearCookie("uid")
-    res.json({
-        signedOut: true
-    })
 })
 
 app.post("/getData", async (req: Request, res: Response) => {
