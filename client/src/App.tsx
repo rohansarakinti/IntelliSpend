@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { NextUIProvider } from '@nextui-org/react'
 import LoginPage from './pages/LoginPage'
-import './App.css'
 
 function App() {
   const router = createBrowserRouter([
@@ -15,7 +15,9 @@ function App() {
     }
   ])
   return (
-    <RouterProvider router={router}></RouterProvider>
+    <NextUIProvider>
+      <RouterProvider router={router}></RouterProvider>
+    </NextUIProvider>
   )
 }
 
