@@ -3,13 +3,16 @@ import { NextUIProvider } from '@nextui-org/react'
 import LoginPage from './pages/LoginPage'
 import Signup from './pages/Signup'
 import Home from './pages/Home'
+import Error404 from './pages/404'
+import Dashboard from './pages/Dashboard'
+import Error500 from './pages/500'
 
 function App() {
   const router = createBrowserRouter([
     {
       path: "/",
       element: <Home />,
-      errorElement: <div>Not found</div>
+      errorElement: <Error404 />
     },
     {
       path: "/login",
@@ -18,6 +21,14 @@ function App() {
     {
       path: "/register",
       element: <Signup />
+    },
+    {
+      path: "/dashboard",
+      element: <Dashboard />
+    },
+    {
+      path: "/Error500",
+      element: <Error500 />
     }
   ])
   return (

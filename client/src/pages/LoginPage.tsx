@@ -8,7 +8,7 @@ import { EyeSlash, Eye } from 'react-bootstrap-icons'
 import "./animations/index.css"
 
 export default function LoginPage() {
-    document.title = "IntelliSpend - Login"
+    document.title = "Login"
     const [loading, setLoading] = useState(true)
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -18,8 +18,9 @@ export default function LoginPage() {
     useEffect(() => {
         if (window.localStorage.getItem("uid") || window.sessionStorage.getItem("uid")) {
             window.location.replace("/dashboard")
+        } else {
+            setLoading(false)
         }
-        setLoading(false)
     }, [])
 
     const handleSubmit = () => {

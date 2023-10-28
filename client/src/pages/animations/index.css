@@ -11,7 +11,33 @@
     }
 }
 
+@keyframes MoveRight {
+    0% {
+        position: relative;
+        left: 0;
+    }
+    50% {
+        position: relative;
+        left: 5px;
+    }
+    75% {
+        position: relative;
+        left: 0;
+    }
+    100% {
+        position: relative;
+        left: 0;
+    }
+}
+
 .fadeIn {
     animation-name: FadeIn;
     animation-duration: 2s
+}
+
+.bounceRight {
+    animation-name: MoveRight;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+    animation-delay: 2s;
 }

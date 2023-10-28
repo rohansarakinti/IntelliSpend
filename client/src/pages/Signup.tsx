@@ -1,14 +1,14 @@
-import client from "../components/instance";
-import { useEffect, useState } from "react";
-import Container from "../components/Container";
-import Loading from "../components/Loading";
-import Navbar from "../components/Navbar";
-import { Card, CardBody, Input, Button, Checkbox } from "@nextui-org/react";
-import { EyeSlash, Eye } from "react-bootstrap-icons";
-import Validator from "../components/validator";
+import client from "../components/instance"
+import { useEffect, useState } from "react"
+import Container from "../components/Container"
+import Loading from "../components/Loading"
+import Navbar from "../components/Navbar"
+import { Card, CardBody, Input, Button, Checkbox } from "@nextui-org/react"
+import { EyeSlash, Eye } from "react-bootstrap-icons"
+import Validator from "../components/validator"
 
 export default function Signup() {
-    document.title = "IntelliSpend - Register"
+    document.title = "Register"
     const [loading, setLoading] = useState(true)
     const [email, setEmail] = useState('')
     const [confirmEmail, setConfirmEmail] = useState('')
@@ -41,8 +41,9 @@ export default function Signup() {
     useEffect(() => {
         if (window.localStorage.getItem("uid") || window.sessionStorage.getItem("uid")) {
             window.location.replace("/dashboard")
+        } else {
+            setLoading(false)
         }
-        setLoading(false)
     }, [])
 
     const handleSubmit = () => {
