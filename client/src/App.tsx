@@ -6,6 +6,7 @@ import Home from './pages/Home'
 import Error404 from './pages/404'
 import Dashboard from './pages/Dashboard'
 import Error500 from './pages/500'
+import GettingStarted1 from './pages/gettingStarted1'
 
 function App() {
   const router = createBrowserRouter([
@@ -29,6 +30,10 @@ function App() {
     {
       path: "/Error500",
       element: <Error500 />
+    },
+    {
+      path: "/getStarted",
+      element: <GettingStarted1 />  
     }
   ])
   return (

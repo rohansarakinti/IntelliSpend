@@ -15,6 +15,7 @@ export default function LoginPage() {
     const [submitting, setSubmitting] = useState(false)
     const [visible, setVisible] = useState(false)
     const [rememberMe, setRememberMe] = useState(false)
+
     useEffect(() => {
         if (window.localStorage.getItem("uid") || window.sessionStorage.getItem("uid")) {
             window.location.replace("/dashboard")
@@ -27,16 +28,10 @@ export default function LoginPage() {
         setSubmitting(true)
         client.post("/login", {
             email: email,
-            password: password
+            password: password,
+            rememberMe: rememberMe
         }).then((response) => {
-            console.log(response.data.error)
-            console.log(response.data.errorMessage)
-            if (!response.data.error) {
-                if (rememberMe) {
-                    window.localStorage.setItem("uid", response.data.uid)
-                } else {
-                    window.sessionStorage.setItem("uid", response.data.uid)
-                }
+            if (response.data.success) {
                 window.location.replace("/dashboard")
             } else {
                 setSubmitting(false)
@@ -58,8 +53,8 @@ export default function LoginPage() {
                             <div className="w-full h-full flex justify-center">
                                 <div className="w-5/6 flex flex-col items-center justify-center h-full gap-y-5">
                                     <h1 className="font-normal text-4xl">Log In</h1>
-                                    <Input label="Email" type="email" size="sm" variant='bordered' onInput={(e) => {
-                                        setEmail(e.currentTarget.value)
+                                    <Input label="Email" type="email" size="sm" variant='bordered' onChange={(e) => {
+                                        setEmail(e.target.value)
                                     }} />
                                     <Input label="Password" size="sm" variant="bordered" type={visible ? "text" : "password"} endContent={
                                         <button onClick={() => {
@@ -69,8 +64,8 @@ export default function LoginPage() {
                                                 visible ? <EyeSlash /> : <Eye />
                                             }
                                         </button>
-                                    } onInput={(e) => {
-                                        setPassword(e.currentTarget.value)
+                                    } onChange={(e) => {
+                                        setPassword(e.target.value)
                                     }} />
                                     <Checkbox color='success' isSelected={rememberMe} onClick={() => {
                                         setRememberMe(prevState => !prevState)
