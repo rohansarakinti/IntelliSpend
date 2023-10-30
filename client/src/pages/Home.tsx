@@ -18,7 +18,7 @@ export default function Home() {
     } else {
         return (
             <Container>
-                <div className="flex flex-col items-center min-h-full border-b border-b-gray-400">
+                <div className="flex flex-col items-center min-h-full">
                     <Navbar />
                     <div className="flex flex-col grow items-center justify-center w-5/6">
                         <div className="flex flex-col items-center gap-y-6 fadeIn w-full">
@@ -35,11 +35,6 @@ export default function Home() {
                                 </span>
                             </Button>
                         </div>
-                    </div>
-                </div>
-                <div className="w-full flex flex-col items-center pt-20">
-                    <div className="w-5/6 flex flex-col items-center justify-center">
-                        <h1 className="text-5xl">Your own personal budgets</h1>
                     </div>
                 </div>
             </Container>

@@ -30,6 +30,17 @@
     }
 }
 
+@keyframes SlideRight {
+    0% {
+        position: relative;
+        left: 0;
+    }
+    100% {
+        position: relative;
+        left: 100%;
+    }
+}
+
 .fadeIn {
     animation-name: FadeIn;
     animation-duration: 2s
@@ -40,4 +51,10 @@
     animation-duration: 1.5s;
     animation-iteration-count: infinite;
     animation-delay: 2s;
+}
+
+.slideRight {
+    animation-name: SlideRight;
+    animation-duration: 1.2s;
+    animation-fill-mode: forwards;
 }

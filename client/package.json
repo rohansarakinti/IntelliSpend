@@ -12,7 +12,6 @@
   "dependencies": {
     "@nextui-org/react": "^2.1.13",
     "axios": "^1.5.1",
-    "chart.js": "^4.4.0",
     "framer-motion": "^10.16.4",
     "react": "^18.2.0",
     "react-bootstrap-icons": "^1.10.3",
@@ -20,7 +19,8 @@
     "react-dom": "^18.2.0",
     "react-plaid-link": "^3.5.1",
     "react-router-dom": "^6.17.0",
-    "react-spinners": "^0.13.8"
+    "react-spinners": "^0.13.8",
+    "sweetalert2": "^11.8.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",

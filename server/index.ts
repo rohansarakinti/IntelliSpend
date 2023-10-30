@@ -221,6 +221,24 @@ app.post("/getTransactions", async (req: Request, res: Response) => {
     }
 })
 
+app.post("/setBudget", async (req: Request, res: Response) => {
+    const uid = req.body.uid
+    try {
+        await updateDoc(doc(db, Collections.Users, uid), {
+            budget: req.body.budget
+        })
+        res.json({
+            error: false,
+            errorMessage: ""
+        })
+    } catch (error) {
+        res.json({
+            error: true,
+            errorMessage: "SERVER_ERROR"
+        })
+    }
+})
+
 app.listen(8080, () => {
     console.log("Server running on http://localhost:8080")
 })
