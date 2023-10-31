@@ -6,6 +6,7 @@ import Navbar from "../components/Navbar"
 import { Card, CardBody, Input, Button, Checkbox } from "@nextui-org/react"
 import { EyeSlash, Eye } from "react-bootstrap-icons"
 import Validator from "../components/validator"
+import Swal from "sweetalert2"
 
 export default function Signup() {
     document.title = "Register"
@@ -56,6 +57,11 @@ export default function Signup() {
             }).then((response) => {
                 if (response.data.error) {
                     setSubmitting(false)
+                    Swal.fire({
+                        title: "Account already exists",
+                        text: "Please try logging in",
+                        icon: "error",
+                    })
                     console.error(response.data.errorMessage)
                 } else {
                     if (rememberMe) {

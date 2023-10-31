@@ -9,7 +9,7 @@
     "plaid": "^17.0.0"
   },
   "scripts": {
-    "start": "node index.js"
+    "start": "node dist/index.js"
   },
   "devDependencies": {
     "@types/cookie-parser": "^1.4.5",

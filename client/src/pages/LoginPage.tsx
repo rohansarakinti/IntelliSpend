@@ -6,6 +6,7 @@ import Navbar from '../components/Navbar'
 import { Card, CardBody, Button, Input, Checkbox } from "@nextui-org/react"
 import { EyeSlash, Eye } from 'react-bootstrap-icons'
 import "./animations/index.css"
+import Swal from 'sweetalert2'
 
 export default function LoginPage() {
     document.title = "Login"
@@ -28,12 +29,20 @@ export default function LoginPage() {
         setSubmitting(true)
         client.post("/login", {
             email: email,
-            password: password,
-            rememberMe: rememberMe
+            password: password
         }).then((response) => {
-            if (response.data.success) {
+            if (!response.data.error) {
+                if (rememberMe) {
+                    window.localStorage.setItem("uid", response.data.uid)
+                } else {
+                    window.sessionStorage.setItem("uid", response.data.uid)
+                }
                 window.location.replace("/dashboard")
             } else {
+                Swal.fire({
+                    title: "Incorrect username/password",
+                    icon: "error"
+                })
                 setSubmitting(false)
             }
         }).catch((error) => {
