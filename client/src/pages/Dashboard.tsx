@@ -33,10 +33,10 @@ export default function Dashboard() {
             client.post("/getData", {
                 uid: window.localStorage.getItem("uid") || window.sessionStorage.getItem("uid")
             }).then((response) => {
-                setLoading(false)
                 if (!response.data.budget) {
                     window.location.replace("/getStarted")
                 } else {
+                    setLoading(false)
                     setBudget(response.data.budget)
                     if (response.data.hasToken) {
                         setHasToken(true)
