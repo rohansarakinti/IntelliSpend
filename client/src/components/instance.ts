@@ -1,7 +1,7 @@
 import axios from "axios"
 
 const client = axios.create({
-    baseURL: "https://intellispend.uc.r.appspot.com"
+    baseURL: "https://intellispend.onrender.com/"
 })
 
 export default client
