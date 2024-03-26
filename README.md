@@ -11,6 +11,6 @@
 - [Figma](https://www.figma.com)
 - [OpenAI Docs](https://platform.openai.com/docs/introduction/overview)
 
-**Deadline:** October 29 (So we can register for the comp)
+
 
 Happy Coding!
